@@ -18,6 +18,8 @@ struct Token {
     TokenType type;
 };
 
+using TokenIter = std::vector<Token>::const_iterator;
+
 class Tokenizer {
 public:
     Tokenizer(std::string input) : m_input(input) {}
@@ -27,6 +29,8 @@ public:
     void dump_errors();
 
     void dump_tokens();
+
+    TokenIter iter() const { return m_tokens.cbegin(); }
 
 private:
     struct Error {

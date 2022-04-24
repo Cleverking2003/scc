@@ -7,7 +7,3 @@ void Codegen::generate(Node& top) {
 void Codegen::emit_text_asm(std::string) {
 
 }
-
-void Codegen::visit(Node&) {
-
-}

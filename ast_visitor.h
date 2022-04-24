@@ -1,8 +1,10 @@
 #pragma once
 
-#include "parser.h"
+#include "ast.h"
 
 class ASTVisitor {
 public:
     virtual void visit(Node&) = 0;
+    virtual void visit(BinExpr&) = 0;
+    virtual void visit(NumLiteral&) = 0;
 };

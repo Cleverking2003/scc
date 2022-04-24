@@ -1,14 +1,9 @@
 #pragma once
 
+#include "ast.h"
 #include "tokenizer.h"
-#include <memory>
+#include <optional>
 #include <vector>
-
-class Node {
-
-};
-
-using NodePtr = std::unique_ptr<Node>;
 
 class Parser {
 public:
@@ -18,6 +13,16 @@ public:
     void dump_errors();
 
 private:
-    struct Error {};
+    bool peek(TokenType type);
+    std::optional<Token> consume(TokenType type);
+
+    NodePtr parse_num();
+    NodePtr parse_add();
+
+    TokenIter m_iter;
+    struct Error {
+        Token tok;
+        std::string mesg;
+    };
     std::vector<Error> m_errors;
 };

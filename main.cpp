@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "ast_dumper.h"
 #include "codegen.h"
 #include "parser.h"
 #include "sema.h"
@@ -25,6 +26,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     if (top) {
+        ASTDumper d;
+        d.dump(*top);
         Sema s;
         s.analyze(*top);
         if (s.has_errors()) {
