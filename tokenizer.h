@@ -3,8 +3,19 @@
 #include <string>
 #include <vector>
 
-struct Token {
+using Index = std::string::const_iterator;
 
+enum TokenType {
+    TkPlus,
+    TkMinus,
+    TkNum,
+    TkEof,
+};
+
+struct Token {
+    Index start, end;
+    int line, col;
+    TokenType type;
 };
 
 class Tokenizer {
@@ -15,8 +26,13 @@ public:
     bool has_errors() { return !m_errors.empty(); }
     void dump_errors();
 
+    void dump_tokens();
+
 private:
-    struct Error {};
+    struct Error {
+        int line, col;
+        std::string mesg;
+    };
 
     std::string m_input;
     std::vector<Token> m_tokens;

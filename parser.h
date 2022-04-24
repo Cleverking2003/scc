@@ -1,23 +1,23 @@
 #pragma once
 
 #include "tokenizer.h"
+#include <memory>
 #include <vector>
 
 class Node {
 
 };
 
+using NodePtr = std::unique_ptr<Node>;
+
 class Parser {
 public:
-    explicit Parser(Tokenizer& t) : m_tokenizer(t) {}
-    Node parse();
+    NodePtr parse(const Tokenizer& t);
 
     bool has_errors() { return !m_errors.empty(); }
     void dump_errors();
 
 private:
-    Tokenizer& m_tokenizer;
-
     struct Error {};
     std::vector<Error> m_errors;
 };

@@ -1,7 +1,7 @@
 #include "parser.h"
 
-Node Parser::parse() {
-    return {};
+NodePtr Parser::parse(const Tokenizer& t) {
+    return nullptr;
 }
 
 void Parser::dump_errors() {

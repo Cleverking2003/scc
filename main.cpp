@@ -17,20 +17,23 @@ int main(int argc, char** argv) {
         t.dump_errors();
         return 1;
     }
-    Parser p(t);
-    Node top = p.parse();
+    t.dump_tokens();
+    Parser p;
+    NodePtr top = p.parse(t);
     if (p.has_errors()) {
         p.dump_errors();
         return 1;
     }
-    Sema s;
-    s.analyze(top);
-    if (s.has_errors()) {
-        s.dump_errors();
-        return 1;
+    if (top) {
+        Sema s;
+        s.analyze(*top);
+        if (s.has_errors()) {
+            s.dump_errors();
+            return 1;
+        }
+        Codegen c;
+        c.generate(*top);
+        c.emit_text_asm("out.asm");
     }
-    Codegen c;
-    c.generate(top);
-    c.emit_text_asm("out.asm");
     return 0;
 }
