@@ -34,9 +34,9 @@ int main(int argc, char** argv) {
             s.dump_errors();
             return 1;
         }
-        Codegen c;
+        Codegen::Codegen c;
         c.generate(*top);
-        c.emit_text_asm("out.asm");
+        c.emit_text_asm("out.s");
     }
     return 0;
 }
