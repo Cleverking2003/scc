@@ -12,6 +12,9 @@ void ASTDumper::visit(Node& node) {
 static const std::string op_str[] = {
     "+",
     "-",
+    "*",
+    "/",
+    "%",
 };
 
 void ASTDumper::visit(BinExpr& expr) {

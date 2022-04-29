@@ -8,6 +8,9 @@ using Index = std::string::const_iterator;
 enum TokenType {
     TkPlus,
     TkMinus,
+    TkStar,
+    TkSlash,
+    TkPercent,
     TkNum,
     TkEof,
 };

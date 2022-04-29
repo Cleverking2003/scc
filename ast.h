@@ -26,6 +26,9 @@ using NodePtr = std::unique_ptr<Node>;
 enum BinOpType {
     Add,
     Sub,
+    Mul,
+    Div,
+    Mod,
 };
 
 class BinExpr : public Node {

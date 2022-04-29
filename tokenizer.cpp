@@ -4,6 +4,8 @@
 static const std::string token_names[] = {
     "TkPlus",
     "TkMinus",
+    "TkStar",
+    "TkSlash",
     "TkNum",
     "TkEof",
 };
@@ -27,6 +29,15 @@ void Tokenizer::tokenize() {
                 break;
             case '-':
                 t = TkMinus;
+                break;
+            case '*':
+                t = TkStar;
+                break;
+            case '/':
+                t = TkSlash;
+                break;
+            case '%':
+                t = TkPercent;
                 break;
             default:
                 m_errors.push_back({ line, col, "Unknown symbol" });

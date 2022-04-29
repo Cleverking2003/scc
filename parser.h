@@ -17,6 +17,7 @@ private:
     std::optional<Token> consume(TokenType type);
 
     NodePtr parse_num();
+    NodePtr parse_mul();
     NodePtr parse_add();
 
     TokenIter m_iter;

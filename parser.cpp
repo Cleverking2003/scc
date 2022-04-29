@@ -25,14 +25,29 @@ NodePtr Parser::parse_num() {
 static const BinOpType bin_types[] = {
     Add,
     Sub,
+    Mul,
+    Div,
+    Mod,
 };
 
-NodePtr Parser::parse_add() {
+NodePtr Parser::parse_mul() {
     auto lhs = parse_num();
+    if (!lhs) return nullptr;
+    while (peek(TkStar) || peek(TkSlash) || peek(TkPercent)) {
+        auto type = (m_iter++)->type;
+        auto rhs = parse_num();
+        if (!rhs) return nullptr;
+        lhs = std::make_unique<BinExpr>(lhs, rhs, bin_types[type]);
+    }
+    return lhs;
+}
+
+NodePtr Parser::parse_add() {
+    auto lhs = parse_mul();
     if (!lhs) return nullptr;
     while (peek(TkPlus) || peek(TkMinus)) {
         auto type = (m_iter++)->type;
-        auto rhs = parse_num();
+        auto rhs = parse_mul();
         if (!rhs) return nullptr;
         lhs = std::make_unique<BinExpr>(lhs, rhs, bin_types[type]);
     }

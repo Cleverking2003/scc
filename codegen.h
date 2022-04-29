@@ -9,9 +9,12 @@ namespace Codegen {
 enum InstType {
     Add,
     Sub,
+    Imul,
+    Idiv,
     Push,
     Pop,
     Mov,
+    Cqo,
 };
 
 enum OperandType {
@@ -43,6 +46,7 @@ struct Inst {
     InstType type;
     std::optional<InstData> src, dest;
 
+    Inst(InstType type) : type(type), src(), dest() {}
     Inst(InstType type, InstData op) : type(type), src(op), dest() {}
     Inst(InstType type, InstData src, InstData dest) : type(type), src(src), dest(dest) {}
 };
