@@ -59,6 +59,9 @@ public:
     void visit(Node&) override;
     void visit(BinExpr&) override;
     void visit(NumLiteral&) override;
+    void visit(VarDecl&) override;
+    void visit(VarRef&) override;
+    void visit(CompoundStmt&) override;
 
 private:
     std::vector<Inst> m_isns;

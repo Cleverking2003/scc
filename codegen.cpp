@@ -43,6 +43,18 @@ void Codegen::visit(NumLiteral& literal) {
     m_isns.push_back(Inst(Mov, InstData(literal.m_value), InstData(RAX)));
 }
 
+void Codegen::visit(VarDecl& decl) {
+
+}
+
+void Codegen::visit(VarRef& ref) {
+    
+}
+
+void Codegen::visit(CompoundStmt& stmt) {
+    
+}
+
 static const std::string inst_names[] = {
     "add",
     "sub",

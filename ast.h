@@ -1,12 +1,17 @@
 #pragma once
 
 #include <memory>
+#include <string>
+#include <vector>
 
 class ASTVisitor;
 
 enum NodeType {
     NdBinExpr,
     NdNum,
+    NdVarDecl,
+    NdVarRef,
+    NdCompoundStmt,
 };
 
 class Node {
@@ -29,6 +34,7 @@ enum BinOpType {
     Mul,
     Div,
     Mod,
+    Assign,
 };
 
 class BinExpr : public Node {
@@ -49,4 +55,39 @@ public:
     void accept_vis(ASTVisitor& vis);
 
     int m_value;
+};
+
+struct Var {
+    Var(std::string& name) : name(std::move(name)) {}
+
+    std::string name;
+    int offset { 0 };
+};
+
+class VarDecl : public Node {
+public:
+    explicit VarDecl(std::string& name) : Node(NdVarDecl), var(name) {}
+
+    void accept_vis(ASTVisitor& vis);
+
+    Var var;
+};
+
+class VarRef : public Node {
+public:
+    explicit VarRef(std::string& name) : Node(NdVarRef), name(std::move(name)) {}
+
+    void accept_vis(ASTVisitor& vis);
+
+    std::string name;
+    Var* var { nullptr };
+};
+
+class CompoundStmt : public Node {
+public:
+    explicit CompoundStmt() : Node(NdCompoundStmt) {}
+
+    void accept_vis(ASTVisitor& vis);
+
+    std::vector<NodePtr> stmts;
 };

@@ -11,7 +11,11 @@ enum TokenType {
     TkStar,
     TkSlash,
     TkPercent,
+    TkEqual,
+    TkSemicolon,
     TkNum,
+    TkIdent,
+    TkInt,
     TkEof,
 };
 

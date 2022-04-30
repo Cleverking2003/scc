@@ -10,6 +10,9 @@ public:
     void visit(Node&) override {}
     void visit(BinExpr&) override {}
     void visit(NumLiteral&) override {}
+    void visit(VarDecl&) override {}
+    void visit(VarRef&) override {}
+    void visit(CompoundStmt&) override {}
 
     bool has_errors() { return !m_errors.empty(); }
     void dump_errors();

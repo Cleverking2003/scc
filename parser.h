@@ -19,6 +19,11 @@ private:
     NodePtr parse_num();
     NodePtr parse_mul();
     NodePtr parse_add();
+    NodePtr parse_decl();
+    NodePtr parse_assign_expr();
+    NodePtr parse_expr_stmt();
+    NodePtr parse_stmt();
+    NodePtr parse_compound_stmt();
 
     TokenIter m_iter;
     struct Error {
